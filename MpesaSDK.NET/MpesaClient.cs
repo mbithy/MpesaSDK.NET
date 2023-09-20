@@ -221,7 +221,7 @@ namespace MpesaSDK.NET
         /// <returns></returns>
         private Task<MpesaResponse> C2BRegisterUrlAsync(C2BRegisterURLRequest request)
         {
-            return CommonMpesaPostAsync("mpesa/c2b/v1/registerurl", request.ToString());
+            return CommonMpesaPostAsync("mpesa/c2b/v2/registerurl", request.ToString());
         }
 
         /// <summary>
@@ -333,6 +333,8 @@ namespace MpesaSDK.NET
         /// <returns></returns>
         public Task<MpesaResponse> B2CAsync(string initiatorName, string initiatorPassword, Command command, long amount, string partyA, string partyB, string remarks, string queueTimeOutURL, string resultURL, string occassion)
         {
+            var saf = initiatorPassword.ToMpesaSecurityCredential();
+            var sx = saf;
             return B2CAsync(new B2CRequest()
             {
                 InitiatorName = initiatorName,

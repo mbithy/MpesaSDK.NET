@@ -28,7 +28,7 @@ Created using .net Standard 2.0.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>F:\Dave\MpesaSDK.NET\MpesaSDK.NET\MpesaSDK.NET.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
