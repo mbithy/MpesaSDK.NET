@@ -44,22 +44,33 @@ namespace MpesaSDK.NET
 
             try
             {
-                RestClient restClient = new RestClient(baseUrl)
+                RestClient restClient = new RestClient(baseUrl);
+                
+                RestRequest restRequest = new RestRequest(oauthUrl, Method.Get)
                 {
                     Authenticator = new HttpBasicAuthenticator(_consumerKey, _consumerSecret)
                 };
-                RestRequest restRequest = new RestRequest(oauthUrl, Method.GET);
+
                 restRequest.AddHeader("Content-Type", "application/json");
-                var response = await restClient.ExecuteTaskAsync<AccessTokenDto>(restRequest);
+                var response = restClient.ExecuteAsync(restRequest).Result;
                 if (!response.IsSuccessful)
                 {
                     HandleRestExceptions(response, "Error getting access token");
                 }
 
-                _tokenExpiresIn = now.AddSeconds(response.Data.ExpiresIn).AddMinutes(-1);
-                _accessToken = response.Data.AccessToken;
-                return _accessToken;
-
+                if (response.Content != null)
+                {
+                    var rep = JsonConvert.DeserializeObject<dynamic>(response.Content);
+                    Console.WriteLine(rep.expires_in);
+                    _tokenExpiresIn = now.AddSeconds(double.Parse(rep.expires_in.ToString())).AddMinutes(-1);
+                    _accessToken = rep.access_token;
+                    return _accessToken;
+                }
+                else
+                {
+                    HandleRestExceptions(response, "Error getting access token");
+                    return "FAIL";
+                }
             }
             catch (Exception)
             {
@@ -74,13 +85,14 @@ namespace MpesaSDK.NET
         {
             try
             {
+                Console.WriteLine(data);
                 var token = await GetAccessToken();
                 RestClient restClient = new RestClient(baseUrl);
-                RestRequest restRequest = new RestRequest(resourceUrl, Method.POST);
+                RestRequest restRequest = new RestRequest(resourceUrl, Method.Post);
                 restRequest.AddHeader("Content-Type", "application/json");
                 restRequest.AddHeader("Authorization", $"Bearer {token}");
-                restRequest.AddParameter("application/json;charset=utf-8", data, ParameterType.RequestBody);
-                var response = await restClient.ExecuteTaskAsync(restRequest);
+                restRequest.AddParameter("application/json", data, ParameterType.RequestBody);
+                var response = await restClient.ExecuteAsync(restRequest);
 
                 //var result = new MpesaResponse();
                 (S SuccessResponse, ErrorResponse ErrorResponse, bool IsSuccessful) result = (new S(), null, false);
@@ -125,7 +137,7 @@ namespace MpesaSDK.NET
 
         }
 
-        private void HandleRestExceptions(IRestResponse response, string message)
+        private void HandleRestExceptions(RestResponse response, string message)
         {
             message += ". " +
                 (string.IsNullOrWhiteSpace(response.ErrorMessage) ? "" : response.ErrorMessage + ". ") +
@@ -159,7 +171,7 @@ namespace MpesaSDK.NET
             this.ValidateBusinessShortCode(request.BusinessShortCode);
             SameValueValidator.ValidateSameValue(request.PartyB, request.BusinessShortCode, "PartyB", "BusinessShortCode");
 
-            LengthValidator.ValidateLength(request.AccountReference, "AccountReference", 12);
+            //LengthValidator.ValidateLength(request.AccountReference, "AccountReference", 120);
 
             LengthValidator.ValidateLength(request.TransactionDesc, "TransactionDesc", 13, 1);
 

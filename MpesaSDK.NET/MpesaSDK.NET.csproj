@@ -1,53 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Mpesa Daraja API implementation.
-
-This package makes it easy for .Net developers to integrate to safaricom mpesa api.
-
-Created using .net Standard 2.0.</Description>
-    <PackageProjectUrl>https://github.com/mutiadavid/MpesaSDK.NET</PackageProjectUrl>
-    <PackageIconUrl></PackageIconUrl>
-    <RepositoryUrl>https://github.com/mutiadavid/MpesaSDK.NET</RepositoryUrl>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <Copyright>davidmutia @2018</Copyright>
-    <PackageTags>Mpesa, Daraja, SDK</PackageTags>
-    <PackageReleaseNotes>Supported platforms:
-- .NET Framework 4.6+
-- .NET Standard 2.0+
-- .NET Core 2.0+</PackageReleaseNotes>
-    <Authors>davidmutia</Authors>
-    <Product>davidmutia</Product>
-    <Version>2.1.5</Version>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Version>3.0.3</Version>
+    <Authors>Mbithi Kioko</Authors>
+    <Company>Ndovu Nine</Company>
+    <Product>MpesaSDK NET 5</Product>
+    <AssemblyVersion>3.0.3.0</AssemblyVersion>
+    <FileVersion>3.0.3.0</FileVersion>
+    <Description>Daraje Wrapper for C#</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AssemblyVersion>2.1.5.0</AssemblyVersion>
-    <FileVersion>2.1.5.0</FileVersion>
-    <PackageLicenseFile>license.txt</PackageLicenseFile>
-    <PackageIcon>mpesasdk.png</PackageIcon>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
-  </PropertyGroup>
+  
+
+ 
 
   <ItemGroup>
-    <Compile Remove="Examples\**" />
-    <EmbeddedResource Remove="Examples\**" />
-    <None Remove="Examples\**" />
-    <None Include="..\license.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="mpesasdk.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="RestSharp" Version="106.12.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
 </Project>

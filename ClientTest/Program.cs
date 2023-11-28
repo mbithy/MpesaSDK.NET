@@ -10,7 +10,7 @@ namespace ClientTest
     internal class Program
     {
         // ETHICUS
-         private static string consumerkey = "lMMLbzUmlBz2EZ87v6aHT1KssYk379yB";
+        /* private static string consumerkey = "lMMLbzUmlBz2EZ87v6aHT1KssYk379yB";
         private static string consumersecret = "cMUoF7tLpKS1430l";
         private static string businesscode = "3012521"; //partyA
         private static string phonenumber = "254705593689"; //partyB
@@ -39,6 +39,16 @@ namespace ClientTest
         private static string stkPushCallbackURL = "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2FjYWxsYmFja295dXdhbGxldA";
         public static string initiatorName = "ndovunine.api";//partyA name
         public static string password = "Mkn$4848mkn"; //initiator password*/
+
+        //TALOS GROUP
+        private static string consumerkey = "XYVMOijnBcJLtfYCMIkEyjAjzGeuVOZ0";
+        private static string consumersecret = "rUcrcRtIKtUt2s16";
+        private static string businesscode = "4095701"; //partyA
+        private static string phonenumber = "254705593689"; //partyB
+        private static string passkey = "03a5348e844178081f3cf03261df192d01068246f3bf9a7a2eb343e63bcf416e";
+        private static string stkPushCallbackURL = "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2FjYWxsYmFja295dXdhbGxldA";
+        public static string initiatorName = "talos.api";//partyA name
+        public static string password = "@Qb1e90ff"; //initiator password*/
 
         static MpesaClient mpesaclient = new MpesaClient(consumerkey, consumersecret,false);
 
@@ -88,7 +98,7 @@ namespace ClientTest
         {
             //valid commands SalaryPayment, BusinessPayment, PromotionPayment
             //change result and timeout urls
-            var result = await mpesaclient.B2CAsync(initiatorName.ToUpper(), password, Command.BusinessPayment, 20, businesscode, phonenumber, "remarks", "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2Fjb25maXJtYXRpb25veXV3YWxsZXQ", "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2Fjb25maXJtYXRpb25veXV3YWxsZXQ", "occassion");
+            var result = await mpesaclient.B2CAsync(initiatorName.ToUpper(), password, Command.BusinessPayment, 2500, businesscode, phonenumber, "remarks", "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2Fjb25maXJtYXRpb25veXV3YWxsZXQ", "https://oyu.ndovunine.com/api/b3l1d2FsbGV0TXBlc2E/TXBlc2Fjb25maXJtYXRpb25veXV3YWxsZXQ", "occassion");
             Console.WriteLine(result.ToString());
         }
 
