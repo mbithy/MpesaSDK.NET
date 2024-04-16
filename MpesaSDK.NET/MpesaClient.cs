@@ -1,13 +1,14 @@
-using MpesaSDK.NET.Dtos;
 using MpesaSDK.NET.Dtos.Requests;
 using MpesaSDK.NET.Dtos.Responses;
 using MpesaSDK.NET.Enums;
 using MpesaSDK.NET.Validators;
+
 using Newtonsoft.Json;
+
 using RestSharp;
 using RestSharp.Authenticators;
+
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MpesaSDK.NET
@@ -45,13 +46,13 @@ namespace MpesaSDK.NET
             try
             {
                 RestClient restClient = new RestClient(baseUrl);
-                
+
                 RestRequest restRequest = new RestRequest(oauthUrl, Method.Get)
                 {
                     Authenticator = new HttpBasicAuthenticator(_consumerKey, _consumerSecret)
                 };
 
-                restRequest.AddHeader("Content-Type", "application/json");
+                //restRequest.AddHeader("Content-Type", "application/json");
                 var response = restClient.ExecuteAsync(restRequest).Result;
                 if (!response.IsSuccessful)
                 {
@@ -89,7 +90,7 @@ namespace MpesaSDK.NET
                 var token = await GetAccessToken();
                 RestClient restClient = new RestClient(baseUrl);
                 RestRequest restRequest = new RestRequest(resourceUrl, Method.Post);
-                restRequest.AddHeader("Content-Type", "application/json");
+                //restRequest.AddHeader("Content-Type", "application/json");
                 restRequest.AddHeader("Authorization", $"Bearer {token}");
                 restRequest.AddParameter("application/json", data, ParameterType.RequestBody);
                 var response = await restClient.ExecuteAsync(restRequest);
@@ -164,7 +165,7 @@ namespace MpesaSDK.NET
         private async Task<StkPushResponse> STKPushAsync(STKPushRequest request)
         {
             this.ValidatePhoneNumber(request.PhoneNumber);
-            SameValueValidator.ValidateSameValue(request.PhoneNumber, request.PartyA, "PatyA", "PhoneNumber");
+            SameValueValidator.ValidateSameValue(request.PhoneNumber, request.PartyA, "PartyA", "PhoneNumber");
 
             this.ValidateTimestamp(request.Timestamp);
 

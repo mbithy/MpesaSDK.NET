@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <Version>3.0.4</Version>
+    <Version>3.0.5</Version>
     <Authors>Mbithi Kioko</Authors>
     <Company>Ndovu Nine</Company>
     <Product>MpesaSDK NET 5</Product>
-    <AssemblyVersion>3.0.4.0</AssemblyVersion>
-    <FileVersion>3.0.4.0</FileVersion>
-    <Description>Daraje Wrapper for C#</Description>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyVersion>3.0.5.0</AssemblyVersion>
+    <FileVersion>3.0.5.0</FileVersion>
+    <Description>Daraja Wrapper for C#</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   
